@@ -1,0 +1,57 @@
+version: "2.1"
+
+networks:
+  tsdb:
+
+services:
+
+  telegraf:
+    container_name: telegraf
+    image: telegraf
+    networks:
+      tsdb:
+        aliases:
+          - telegraf
+    volumes:
+      - ${PWD}/conf/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
+    restart: always
+
+  opentsdb:
+    image: petergrace/opentsdb-docker
+    networks:
+      tsdb:
+        aliases:
+          - opentsdb
+    ports:
+      - "4242:4242"
+    volumes:
+      - "${PWD}/mount-vol/opentsdb/data:/data/hbase"
+      - "${PWD}/conf/opentsdb/opentsdb.conf:/etc/opentsdb/opentsdb.conf"
+    environment:
+      - "WAITSECS=30"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  grafana:
+    image: grafana/grafana
+    user: root
+    networks:
+      tsdb:
+        aliases:
+          - grafana
+    depends_on:
+      - opentsdb
+    ports:
+      - 3000:3000
+    volumes:
+      - "${PWD}/mount-vol/grafana/data:/var/lib/grafana"
+    environment:
+      - "GF_SECURITY_ADMIN_PASSWORD=pass"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"

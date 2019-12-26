@@ -1,0 +1,1370 @@
+{
+	"info": {
+		"_postman_id": "78b41dcd-fe44-4c8b-8c99-959456a7fb44",
+		"name": "OpenTSDB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Metric List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4242/api/suggest?type=metrics&max=100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4242",
+					"path": [
+						"api",
+						"suggest"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "metrics"
+						},
+						{
+							"key": "q",
+							"value": "sys",
+							"disabled": true
+						},
+						{
+							"key": "max",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Metric List",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4242/api/suggest?type=metrics&max=100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4242",
+							"path": [
+								"api",
+								"suggest"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "metrics"
+								},
+								{
+									"key": "q",
+									"value": "sys",
+									"disabled": true
+								},
+								{
+									"key": "max",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Length",
+							"value": "166"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    \"iot.temp.celcius\",\n    \"sys.cpu.nice\",\n    \"sys.cpu.user\",\n    \"telegraf.ping.ping_average_response_ms\",\n    \"telegraf.ping.ping_maximum_response_ms\",\n    \"telegraf.ping.ping_minimum_response_ms\",\n    \"telegraf.ping.ping_packets_received\",\n    \"telegraf.ping.ping_packets_transmitted\",\n    \"telegraf.ping.ping_percent_packet_loss\",\n    \"telegraf.ping.ping_result_code\",\n    \"telegraf.ping.ping_standard_deviation_ms\",\n    \"telegraf.ping.ping_ttl\"\n]"
+				}
+			]
+		},
+		{
+			"name": "OpenTSDB Write",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"metric\": \"iot.gate.counter\",\n        \"timestamp\": 1577160000,\n        \"value\": 1200,\n        \"tags\": {\n        \t\"gate\": 1\n        }\n    },\n    {\n        \"metric\": \"iot.gate.counter\",\n        \"timestamp\": 1577160060,\n        \"value\": 1280,\n        \"tags\": {\n        \t\"gate\": 1\n        }\n    },\n    {\n        \"metric\": \"iot.gate.counter\",\n        \"timestamp\": 1577160120,\n        \"value\": 1340,\n        \"tags\": {\n        \t\"gate\": 1\n        }\n    },\n    {\n        \"metric\": \"iot.gate.counter\",\n        \"timestamp\": 1577160180,\n        \"value\": 1400,\n        \"tags\": {\n        \t\"gate\": 1\n        }\n    },\n    {\n        \"metric\": \"iot.gate.counter\",\n        \"timestamp\": 1577160300,\n        \"value\": 1500,\n        \"tags\": {\n        \t\"gate\": 1\n        }\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4242/api/put?summary=true&details=true",
+					"host": [
+						"localhost"
+					],
+					"port": "4242",
+					"path": [
+						"api",
+						"put"
+					],
+					"query": [
+						{
+							"key": "summary",
+							"value": "true"
+						},
+						{
+							"key": "details",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OpenTSDB Write",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"metric\": \"iot.gate.counter\",\n        \"timestamp\": 1577160000,\n        \"value\": 20,\n        \"tags\": {\n        \t\"gate\": 1\n        }\n    },\n    {\n        \"metric\": \"iot.gate.counter\",\n        \"timestamp\": 1577160060,\n        \"value\": 22,\n        \"tags\": {\n        \t\"gate\": 1\n        }\n    },\n    {\n        \"metric\": \"iot.gate.counter\",\n        \"timestamp\": 1577160120,\n        \"value\": 22,\n        \"tags\": {\n        \t\"gate\": 1\n        }\n    },\n    {\n        \"metric\": \"iot.gate.counter\",\n        \"timestamp\": 1577160180,\n        \"value\": 25,\n        \"tags\": {\n        \t\"gate\": 1\n        }\n    },\n    {\n        \"metric\": \"iot.gate.counter\",\n        \"timestamp\": 1577160300,\n        \"value\": 31,\n        \"tags\": {\n        \t\"gate\": 1\n        }\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4242/api/put?summary=true&details=true",
+							"host": [
+								"localhost"
+							],
+							"port": "4242",
+							"path": [
+								"api",
+								"put"
+							],
+							"query": [
+								{
+									"key": "summary",
+									"value": "true"
+								},
+								{
+									"key": "details",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Length",
+							"value": "61"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": 5,\n    \"failed\": 0,\n    \"errors\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Simple Query - Time Relative",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"start\": \"1h-ago\",\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_average_response_ms\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4242/api/query",
+					"host": [
+						"localhost"
+					],
+					"port": "4242",
+					"path": [
+						"api",
+						"query"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Simple Query - Time Relative",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"start\": \"1h-ago\",\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_average_response_ms\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4242/api/query",
+							"host": [
+								"localhost"
+							],
+							"port": "4242",
+							"path": [
+								"api",
+								"query"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Length",
+							"value": "324"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"metric\": \"telegraf.ping.ping_average_response_ms\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"8.8.8.8\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577328244\": 22.50200080871582,\n            \"1577328304\": 19.56399917602539,\n            \"1577328364\": 28.697999954223633,\n            \"1577328424\": 29.391000747680664\n        }\n    },\n    {\n        \"metric\": \"telegraf.ping.ping_average_response_ms\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"8.8.4.4\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577328244\": 21.7549991607666,\n            \"1577328304\": 19.020999908447266,\n            \"1577328364\": 23.113000869750977,\n            \"1577328424\": 26.089000701904297\n        }\n    },\n    {\n        \"metric\": \"telegraf.ping.ping_average_response_ms\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"202.43.114.130\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577328244\": 18.917999267578125,\n            \"1577328304\": 17.791000366210938,\n            \"1577328364\": 27.15399932861328,\n            \"1577328424\": 28.18400001525879\n        }\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Simple Query - Time Specific",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"start\": 1577180000,\n    \"end\": 1577180400,\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_average_response_ms\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4242/api/query",
+					"host": [
+						"localhost"
+					],
+					"port": "4242",
+					"path": [
+						"api",
+						"query"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Simple Query - Time Specific",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"start\": \"1h-ago\",\n    \"end\": \"10m-ago\",\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_average_response_ms\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4242/api/query",
+							"host": [
+								"localhost"
+							],
+							"port": "4242",
+							"path": [
+								"api",
+								"query"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Length",
+							"value": "450"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"metric\": \"telegraf.ping.ping_average_response_ms\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"8.8.8.8\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577179024\": 41.2599983215332,\n            \"1577179084\": 42.32600021362305,\n            \"1577179144\": 57.875,\n            \"1577179204\": 49.525001525878906,\n            \"1577179264\": 48.71500015258789,\n            \"1577179324\": 50.17499923706055,\n            \"1577179384\": 52.242000579833984,\n            \"1577179444\": 48.652000427246094,\n            \"1577179504\": 42.2760009765625,\n            \"1577179564\": 42.93600082397461,\n            \"1577179624\": 43.840999603271484,\n            \"1577179684\": 51.3489990234375\n        }\n    },\n    {\n        \"metric\": \"telegraf.ping.ping_average_response_ms\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"8.8.4.4\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577179024\": 46.882999420166016,\n            \"1577179084\": 48.25899887084961,\n            \"1577179144\": 62.07400131225586,\n            \"1577179204\": 54.696998596191406,\n            \"1577179264\": 52.94300079345703,\n            \"1577179324\": 56.06999969482422,\n            \"1577179384\": 57.268001556396484,\n            \"1577179444\": 53.33700180053711,\n            \"1577179504\": 51.130001068115234,\n            \"1577179564\": 50.15299987792969,\n            \"1577179624\": 45.62799835205078,\n            \"1577179684\": 58.12900161743164\n        }\n    }\n]"
+				},
+				{
+					"name": "Simple Query - Time Specific 2",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"start\": 1577180000,\n    \"end\": 1577180400,\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_average_response_ms\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4242/api/query",
+							"host": [
+								"localhost"
+							],
+							"port": "4242",
+							"path": [
+								"api",
+								"query"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Length",
+							"value": "313"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"metric\": \"telegraf.ping.ping_average_response_ms\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"8.8.8.8\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577180044\": 37.79199981689453,\n            \"1577180104\": 45.305999755859375,\n            \"1577180164\": 39.68299865722656,\n            \"1577180224\": 45.20199966430664,\n            \"1577180284\": 45.62200164794922,\n            \"1577180344\": 62.14799880981445\n        }\n    },\n    {\n        \"metric\": \"telegraf.ping.ping_average_response_ms\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"8.8.4.4\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577180044\": 46.012001037597656,\n            \"1577180104\": 49.676998138427734,\n            \"1577180164\": 43.18000030517578,\n            \"1577180224\": 50.755001068115234,\n            \"1577180284\": 50.981998443603516,\n            \"1577180344\": 66.85900115966797\n        }\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Simple Query - Tag Specific",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"start\": \"10m-ago\",\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_average_response_ms\",\n            \"tags\": {\n            \t\"url\": \"8.8.8.8\"\n        \t}\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4242/api/query",
+					"host": [
+						"localhost"
+					],
+					"port": "4242",
+					"path": [
+						"api",
+						"query"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Simple Query - Tag Specific",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"start\": \"10m-ago\",\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_average_response_ms\",\n            \"tags\": {\n            \t\"url\": \"8.8.4.4\"\n        \t}\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4242/api/query",
+							"host": [
+								"localhost"
+							],
+							"port": "4242",
+							"path": [
+								"api",
+								"query"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Length",
+							"value": "250"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"metric\": \"telegraf.ping.ping_average_response_ms\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"8.8.4.4\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577180764\": 54.84600067138672,\n            \"1577180824\": 52.35100173950195,\n            \"1577180884\": 57.38600158691406,\n            \"1577181064\": 57.59600067138672,\n            \"1577181124\": 51.54899978637695,\n            \"1577181184\": 59.198001861572266,\n            \"1577181244\": 57.814998626708984,\n            \"1577181304\": 58.323001861572266\n        }\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Simple Query - Tag WIldcard",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"start\": \"10m-ago\",\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_average_response_ms\",\n            \"tags\": {\n            \t\"url\": \"8.8.*\"\n        \t}\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4242/api/query",
+					"host": [
+						"localhost"
+					],
+					"port": "4242",
+					"path": [
+						"api",
+						"query"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Simple Query - Tag WIldcard",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"start\": \"10m-ago\",\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_average_response_ms\",\n            \"tags\": {\n            \t\"url\": \"8.8.*\"\n        \t}\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4242/api/query",
+							"host": [
+								"localhost"
+							],
+							"port": "4242",
+							"path": [
+								"api",
+								"query"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Length",
+							"value": "387"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"metric\": \"telegraf.ping.ping_average_response_ms\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"8.8.8.8\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577181064\": 48.84199905395508,\n            \"1577181124\": 47.1879997253418,\n            \"1577181184\": 54.367000579833984,\n            \"1577181244\": 56.15299987792969,\n            \"1577181304\": 54.22600173950195,\n            \"1577181364\": 49.99399948120117,\n            \"1577181424\": 66.71199798583984,\n            \"1577181484\": 54.810001373291016,\n            \"1577181544\": 47.46200180053711\n        }\n    },\n    {\n        \"metric\": \"telegraf.ping.ping_average_response_ms\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"8.8.4.4\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577181064\": 57.59600067138672,\n            \"1577181124\": 51.54899978637695,\n            \"1577181184\": 59.198001861572266,\n            \"1577181244\": 57.814998626708984,\n            \"1577181304\": 58.323001861572266,\n            \"1577181364\": 50.7599983215332,\n            \"1577181424\": 69.36699676513672,\n            \"1577181484\": 60.83000183105469,\n            \"1577181544\": 49.20100021362305\n        }\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Simple Query - Tag Regex",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"start\": \"10m-ago\",\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_average_response_ms\",\n            \"tags\": {\n            \t\"url\": \"8.8.4.4|202.43.114.130\"\n        \t}\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4242/api/query",
+					"host": [
+						"localhost"
+					],
+					"port": "4242",
+					"path": [
+						"api",
+						"query"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Simple Query - Tag Regex",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"start\": \"10m-ago\",\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_average_response_ms\",\n            \"tags\": {\n            \t\"url\": \"8.8.4.4|202.43.114.130\"\n        \t}\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4242/api/query",
+							"host": [
+								"localhost"
+							],
+							"port": "4242",
+							"path": [
+								"api",
+								"query"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Length",
+							"value": "389"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"metric\": \"telegraf.ping.ping_average_response_ms\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"8.8.4.4\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577181064\": 57.59600067138672,\n            \"1577181124\": 51.54899978637695,\n            \"1577181184\": 59.198001861572266,\n            \"1577181244\": 57.814998626708984,\n            \"1577181304\": 58.323001861572266,\n            \"1577181364\": 50.7599983215332,\n            \"1577181424\": 69.36699676513672,\n            \"1577181484\": 60.83000183105469,\n            \"1577181544\": 49.20100021362305\n        }\n    },\n    {\n        \"metric\": \"telegraf.ping.ping_average_response_ms\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"202.43.114.130\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577181064\": 38.45899963378906,\n            \"1577181124\": 32.13600158691406,\n            \"1577181184\": 39.731998443603516,\n            \"1577181244\": 36.20600128173828,\n            \"1577181304\": 39.58300018310547,\n            \"1577181364\": 28.851999282836914,\n            \"1577181424\": 47.49700164794922,\n            \"1577181484\": 37.96699905395508,\n            \"1577181544\": 28.566999435424805\n        }\n    }\n]"
+				},
+				{
+					"name": "Simple Query - Tag Regex",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"start\": \"10m-ago\",\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_average_response_ms\",\n            \"tags\": {\n            \t\"url\": \"*.4.4\"\n        \t}\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4242/api/query",
+							"host": [
+								"localhost"
+							],
+							"port": "4242",
+							"path": [
+								"api",
+								"query"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Length",
+							"value": "257"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"metric\": \"telegraf.ping.ping_average_response_ms\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"8.8.4.4\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577181064\": 57.59600067138672,\n            \"1577181124\": 51.54899978637695,\n            \"1577181184\": 59.198001861572266,\n            \"1577181244\": 57.814998626708984,\n            \"1577181304\": 58.323001861572266,\n            \"1577181364\": 50.7599983215332,\n            \"1577181424\": 69.36699676513672,\n            \"1577181484\": 60.83000183105469\n        }\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Query Multi Column",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"start\": \"10m-ago\",\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_average_response_ms\",\n            \"tags\": {\n            \t\"url\": \"8.8.4.4|202.43.114.130\"\n        \t}\n        },\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_percent_packet_loss\",\n            \"tags\": {\n            \t\"url\": \"8.8.4.4|202.43.114.130\"\n        \t}\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4242/api/query",
+					"host": [
+						"localhost"
+					],
+					"port": "4242",
+					"path": [
+						"api",
+						"query"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Query Multi Column",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"start\": \"10m-ago\",\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_average_response_ms\",\n            \"tags\": {\n            \t\"url\": \"8.8.4.4|202.43.114.130\"\n        \t}\n        },\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_percent_packet_loss\",\n            \"tags\": {\n            \t\"url\": \"8.8.4.4|202.43.114.130\"\n        \t}\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4242/api/query",
+							"host": [
+								"localhost"
+							],
+							"port": "4242",
+							"path": [
+								"api",
+								"query"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Length",
+							"value": "470"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"metric\": \"telegraf.ping.ping_average_response_ms\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"8.8.4.4\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577181244\": 57.814998626708984,\n            \"1577181304\": 58.323001861572266,\n            \"1577181364\": 50.7599983215332,\n            \"1577181424\": 69.36699676513672,\n            \"1577181484\": 60.83000183105469,\n            \"1577181544\": 49.20100021362305,\n            \"1577181604\": 55.38399887084961,\n            \"1577181664\": 145.072998046875,\n            \"1577181724\": 56.30500030517578,\n            \"1577181784\": 120.86499786376953\n        }\n    },\n    {\n        \"metric\": \"telegraf.ping.ping_average_response_ms\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"202.43.114.130\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577181244\": 36.20600128173828,\n            \"1577181304\": 39.58300018310547,\n            \"1577181364\": 28.851999282836914,\n            \"1577181424\": 47.49700164794922,\n            \"1577181484\": 37.96699905395508,\n            \"1577181544\": 28.566999435424805,\n            \"1577181604\": 30.844999313354492,\n            \"1577181664\": 134.73399353027344,\n            \"1577181724\": 40.150001525878906,\n            \"1577181784\": 111.89099884033203\n        }\n    },\n    {\n        \"metric\": \"telegraf.ping.ping_percent_packet_loss\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"8.8.4.4\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577181244\": 0,\n            \"1577181304\": 0,\n            \"1577181364\": 0,\n            \"1577181424\": 0,\n            \"1577181484\": 0,\n            \"1577181544\": 0,\n            \"1577181604\": 0,\n            \"1577181664\": 0,\n            \"1577181724\": 0,\n            \"1577181784\": 0\n        }\n    },\n    {\n        \"metric\": \"telegraf.ping.ping_percent_packet_loss\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"202.43.114.130\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577181244\": 0,\n            \"1577181304\": 0,\n            \"1577181364\": 0,\n            \"1577181424\": 0,\n            \"1577181484\": 0,\n            \"1577181544\": 0,\n            \"1577181604\": 0,\n            \"1577181664\": 0,\n            \"1577181724\": 0,\n            \"1577181784\": 0\n        }\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Query Group By Time (Downsample)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"start\": \"2h-ago\",\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_average_response_ms\",\n            \"downsample\": \"5m-max-zero\",\n            \"tags\": {\n            \t\"url\": \"8.8.4.4|202.43.114.130\"\n        \t}\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4242/api/query",
+					"host": [
+						"localhost"
+					],
+					"port": "4242",
+					"path": [
+						"api",
+						"query"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Query Group By Time (Downsample)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"start\": \"2h-ago\",\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_average_response_ms\",\n            \"downsample\": \"5m-max-zero\",\n            \"tags\": {\n            \t\"url\": \"8.8.4.4|202.43.114.130\"\n        \t}\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4242/api/query",
+							"host": [
+								"localhost"
+							],
+							"port": "4242",
+							"path": [
+								"api",
+								"query"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Length",
+							"value": "469"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"metric\": \"telegraf.ping.ping_average_response_ms\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"8.8.4.4\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577175000\": 77.23600006103516,\n            \"1577175300\": 124.51200103759766,\n            \"1577175600\": 43.630001068115234,\n            \"1577175900\": 0,\n            \"1577176200\": 0,\n            \"1577176500\": 0,\n            \"1577176800\": 0,\n            \"1577177100\": 0,\n            \"1577177400\": 0,\n            \"1577177700\": 0,\n            \"1577178000\": 0,\n            \"1577178300\": 0,\n            \"1577178600\": 0,\n            \"1577178900\": 62.07400131225586,\n            \"1577179200\": 57.268001556396484,\n            \"1577179500\": 58.12900161743164,\n            \"1577179800\": 51.48899841308594,\n            \"1577180100\": 66.85900115966797,\n            \"1577180400\": 86.02200317382812,\n            \"1577180700\": 57.38600158691406,\n            \"1577181000\": 59.198001861572266,\n            \"1577181300\": 69.36699676513672,\n            \"1577181600\": 145.072998046875,\n            \"1577181900\": 78.0989990234375\n        }\n    },\n    {\n        \"metric\": \"telegraf.ping.ping_average_response_ms\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"202.43.114.130\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577175000\": 0,\n            \"1577175300\": 0,\n            \"1577175600\": 0,\n            \"1577175900\": 0,\n            \"1577176200\": 0,\n            \"1577176500\": 0,\n            \"1577176800\": 0,\n            \"1577177100\": 0,\n            \"1577177400\": 0,\n            \"1577177700\": 0,\n            \"1577178000\": 0,\n            \"1577178300\": 0,\n            \"1577178600\": 0,\n            \"1577178900\": 0,\n            \"1577179200\": 0,\n            \"1577179500\": 0,\n            \"1577179800\": 0,\n            \"1577180100\": 0,\n            \"1577180400\": 0,\n            \"1577180700\": 0,\n            \"1577181000\": 39.731998443603516,\n            \"1577181300\": 47.49700164794922,\n            \"1577181600\": 134.73399353027344,\n            \"1577181900\": 61.430999755859375\n        }\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Query Rate (per-second)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"start\": 1577159940,\n    \"end\": 1577160420,\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"iot.gate.counter\",\n            \"rate\": true,\n            \"rateOptions\": {\n            \t\"counter\": true\n            },\n            \"tags\": {\n            \t\"gate\": 1\n        \t}\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4242/api/query",
+					"host": [
+						"localhost"
+					],
+					"port": "4242",
+					"path": [
+						"api",
+						"query"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Source Counter Data",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"start\": 1577159940,\n    \"end\": 1577160420,\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"iot.gate.counter\",\n            \"rate\": false,\n            \"rateOptions\": {\n            \t\"counter\": true\n            },\n            \"tags\": {\n            \t\"gate\": 1\n        \t}\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4242/api/query",
+							"host": [
+								"localhost"
+							],
+							"port": "4242",
+							"path": [
+								"api",
+								"query"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Length",
+							"value": "132"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"metric\": \"iot.gate.counter\",\n        \"tags\": {\n            \"gate\": \"1\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577160000\": 1200,\n            \"1577160060\": 1280,\n            \"1577160120\": 1340,\n            \"1577160180\": 1400,\n            \"1577160300\": 1500\n        }\n    }\n]"
+				},
+				{
+					"name": "Query Rate (per-second)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"start\": 1577159940,\n    \"end\": 1577160420,\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"iot.gate.counter\",\n            \"rate\": true,\n            \"rateOptions\": {\n            \t\"counter\": true\n            },\n            \"tags\": {\n            \t\"gate\": 1\n        \t}\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4242/api/query",
+							"host": [
+								"localhost"
+							],
+							"port": "4242",
+							"path": [
+								"api",
+								"query"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Length",
+							"value": "133"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"metric\": \"iot.gate.counter\",\n        \"tags\": {\n            \"gate\": \"1\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577160060\": 1.3333333333333333,\n            \"1577160120\": 1,\n            \"1577160180\": 1,\n            \"1577160300\": 0.8333333333333334\n        }\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Query Multi Column (Math Operation)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"time\": {\n\t    \"start\": \"10m-ago\",\n        \"aggregator\": \"none\"\n\t},\n\t\"filters\": [\n\t\t{\n\t\t\t\"id\": \"f1\",\n            \"tags\": [\n                {\n\t\t\t      \"type\":\"regexp\",\n\t\t\t      \"tagk\":\"url\",\n\t\t\t      \"filter\":\"8.8.4.4|202.43.114.130\",\n\t\t\t      \"groupBy\":true\n\t\t\t    }\n            ]\n\t\t}\n\t],\n   \"metrics\": [\n       {\n           \"id\": \"a\",\n           \"metric\": \"telegraf.ping.ping_average_response_ms\",\n           \"filter\": \"f1\",\n           \"fillPolicy\":{\"policy\":\"nan\"}\n       },\n       {\n           \"id\": \"b\",\n           \"metric\": \"telegraf.ping.ping_percent_packet_loss\",\n           \"filter\": \"f1\",\n           \"fillPolicy\":{\"policy\":\"nan\"}\n       }\n   ],\n   \"expressions\": [\n       {\n           \"id\": \"e1\",\n           \"expr\": \"a\"\n       },\n       {\n           \"id\": \"e2\",\n           \"expr\": \"b\"\n       },\n       {\n           \"id\": \"e3\",\n           \"expr\": \"a + b\"\n       }\n    ],\n    \"outputs\":[\n      {\"id\":\"e1\", \"alias\":\"response_time\"},\n      {\"id\":\"e2\", \"alias\":\"packet_loss\"},\n      {\"id\":\"e3\", \"alias\":\"math_operation\"}\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4242/api/query/exp",
+					"host": [
+						"localhost"
+					],
+					"port": "4242",
+					"path": [
+						"api",
+						"query",
+						"exp"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Query Multi Column (Math Operation)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"time\": {\n\t    \"start\": \"10m-ago\",\n        \"aggregator\": \"none\"\n\t},\n\t\"filters\": [\n\t\t{\n\t\t\t\"id\": \"f1\",\n            \"tags\": [\n                {\n\t\t\t      \"type\":\"regexp\",\n\t\t\t      \"tagk\":\"url\",\n\t\t\t      \"filter\":\"8.8.4.4|202.43.114.130\",\n\t\t\t      \"groupBy\":true\n\t\t\t    }\n            ]\n\t\t}\n\t],\n   \"metrics\": [\n       {\n           \"id\": \"a\",\n           \"metric\": \"telegraf.ping.ping_average_response_ms\",\n           \"filter\": \"f1\",\n           \"fillPolicy\":{\"policy\":\"nan\"}\n       },\n       {\n           \"id\": \"b\",\n           \"metric\": \"telegraf.ping.ping_percent_packet_loss\",\n           \"filter\": \"f1\",\n           \"fillPolicy\":{\"policy\":\"nan\"}\n       }\n   ],\n   \"expressions\": [\n       {\n           \"id\": \"e1\",\n           \"expr\": \"a\"\n       },\n       {\n           \"id\": \"e2\",\n           \"expr\": \"b\"\n       },\n       {\n           \"id\": \"e3\",\n           \"expr\": \"a + b\"\n       }\n    ],\n    \"outputs\":[\n      {\"id\":\"e1\", \"alias\":\"response_time\"},\n      {\"id\":\"e2\", \"alias\":\"packet_loss\"},\n      {\"id\":\"e3\", \"alias\":\"math_operation\"}\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4242/api/query/exp",
+							"host": [
+								"localhost"
+							],
+							"port": "4242",
+							"path": [
+								"api",
+								"query",
+								"exp"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Length",
+							"value": "904"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"outputs\": [\n        {\n            \"id\": \"e1\",\n            \"alias\": \"response_time\",\n            \"dps\": [\n                [\n                    1577201764000,\n                    60.29499816894531,\n                    39.33599853515625\n                ],\n                [\n                    1577201824000,\n                    60.00600051879883,\n                    43.90399932861328\n                ],\n                [\n                    1577201884000,\n                    65.70099639892578,\n                    47.60200119018555\n                ],\n                [\n                    1577201944000,\n                    72.14800262451172,\n                    97.32099914550781\n                ],\n                [\n                    1577202004000,\n                    57.733001708984375,\n                    39.44300079345703\n                ],\n                [\n                    1577202064000,\n                    59.64899826049805,\n                    31.240999221801758\n                ],\n                [\n                    1577202124000,\n                    59.0620002746582,\n                    37.49300003051758\n                ],\n                [\n                    1577202184000,\n                    114.08599853515625,\n                    96.54499816894531\n                ],\n                [\n                    1577202244000,\n                    67.40799713134766,\n                    39.83599853515625\n                ],\n                [\n                    1577202304000,\n                    103.58499908447266,\n                    85.73100280761719\n                ]\n            ],\n            \"dpsMeta\": {\n                \"firstTimestamp\": 1577201764000,\n                \"lastTimestamp\": 1577202304000,\n                \"setCount\": 10,\n                \"series\": 2\n            },\n            \"meta\": [\n                {\n                    \"index\": 0,\n                    \"metrics\": [\n                        \"timestamp\"\n                    ]\n                },\n                {\n                    \"index\": 1,\n                    \"metrics\": [\n                        \"telegraf.ping.ping_average_response_ms\"\n                    ],\n                    \"commonTags\": {\n                        \"host\": \"docker-container\",\n                        \"url\": \"8.8.4.4\"\n                    },\n                    \"aggregatedTags\": []\n                },\n                {\n                    \"index\": 2,\n                    \"metrics\": [\n                        \"telegraf.ping.ping_average_response_ms\"\n                    ],\n                    \"commonTags\": {\n                        \"host\": \"docker-container\",\n                        \"url\": \"202.43.114.130\"\n                    },\n                    \"aggregatedTags\": []\n                }\n            ]\n        },\n        {\n            \"id\": \"e2\",\n            \"alias\": \"packet_loss\",\n            \"dps\": [\n                [\n                    1577201764000,\n                    0,\n                    0\n                ],\n                [\n                    1577201824000,\n                    0,\n                    0\n                ],\n                [\n                    1577201884000,\n                    0,\n                    0\n                ],\n                [\n                    1577201944000,\n                    0,\n                    0\n                ],\n                [\n                    1577202004000,\n                    0,\n                    0\n                ],\n                [\n                    1577202064000,\n                    0,\n                    0\n                ],\n                [\n                    1577202124000,\n                    0,\n                    0\n                ],\n                [\n                    1577202184000,\n                    0,\n                    0\n                ],\n                [\n                    1577202244000,\n                    0,\n                    0\n                ],\n                [\n                    1577202304000,\n                    0,\n                    0\n                ]\n            ],\n            \"dpsMeta\": {\n                \"firstTimestamp\": 1577201764000,\n                \"lastTimestamp\": 1577202304000,\n                \"setCount\": 10,\n                \"series\": 2\n            },\n            \"meta\": [\n                {\n                    \"index\": 0,\n                    \"metrics\": [\n                        \"timestamp\"\n                    ]\n                },\n                {\n                    \"index\": 1,\n                    \"metrics\": [\n                        \"telegraf.ping.ping_percent_packet_loss\"\n                    ],\n                    \"commonTags\": {\n                        \"host\": \"docker-container\",\n                        \"url\": \"8.8.4.4\"\n                    },\n                    \"aggregatedTags\": []\n                },\n                {\n                    \"index\": 2,\n                    \"metrics\": [\n                        \"telegraf.ping.ping_percent_packet_loss\"\n                    ],\n                    \"commonTags\": {\n                        \"host\": \"docker-container\",\n                        \"url\": \"202.43.114.130\"\n                    },\n                    \"aggregatedTags\": []\n                }\n            ]\n        },\n        {\n            \"id\": \"e3\",\n            \"alias\": \"math_operation\",\n            \"dps\": [\n                [\n                    1577201764000,\n                    60.29499816894531,\n                    39.33599853515625\n                ],\n                [\n                    1577201824000,\n                    60.00600051879883,\n                    43.90399932861328\n                ],\n                [\n                    1577201884000,\n                    65.70099639892578,\n                    47.60200119018555\n                ],\n                [\n                    1577201944000,\n                    72.14800262451172,\n                    97.32099914550781\n                ],\n                [\n                    1577202004000,\n                    57.733001708984375,\n                    39.44300079345703\n                ],\n                [\n                    1577202064000,\n                    59.64899826049805,\n                    31.240999221801758\n                ],\n                [\n                    1577202124000,\n                    59.0620002746582,\n                    37.49300003051758\n                ],\n                [\n                    1577202184000,\n                    114.08599853515625,\n                    96.54499816894531\n                ],\n                [\n                    1577202244000,\n                    67.40799713134766,\n                    39.83599853515625\n                ],\n                [\n                    1577202304000,\n                    103.58499908447266,\n                    85.73100280761719\n                ]\n            ],\n            \"dpsMeta\": {\n                \"firstTimestamp\": 1577201764000,\n                \"lastTimestamp\": 1577202304000,\n                \"setCount\": 10,\n                \"series\": 2\n            },\n            \"meta\": [\n                {\n                    \"index\": 0,\n                    \"metrics\": [\n                        \"timestamp\"\n                    ]\n                },\n                {\n                    \"index\": 1,\n                    \"metrics\": [\n                        \"telegraf.ping.ping_average_response_ms\",\n                        \"telegraf.ping.ping_percent_packet_loss\"\n                    ],\n                    \"commonTags\": {\n                        \"host\": \"docker-container\",\n                        \"url\": \"8.8.4.4\"\n                    },\n                    \"aggregatedTags\": []\n                },\n                {\n                    \"index\": 2,\n                    \"metrics\": [\n                        \"telegraf.ping.ping_average_response_ms\",\n                        \"telegraf.ping.ping_percent_packet_loss\"\n                    ],\n                    \"commonTags\": {\n                        \"host\": \"docker-container\",\n                        \"url\": \"202.43.114.130\"\n                    },\n                    \"aggregatedTags\": []\n                }\n            ]\n        }\n    ],\n    \"query\": {\n        \"name\": null,\n        \"time\": {\n            \"start\": \"10m-ago\",\n            \"end\": null,\n            \"timezone\": null,\n            \"downsampler\": null,\n            \"aggregator\": \"none\",\n            \"rate\": false\n        },\n        \"filters\": [\n            {\n                \"id\": \"f1\",\n                \"tags\": [\n                    {\n                        \"tagk\": \"url\",\n                        \"filter\": \"8.8.4.4|202.43.114.130\",\n                        \"group_by\": true,\n                        \"type\": \"regexp\"\n                    }\n                ],\n                \"explicitTags\": false\n            }\n        ],\n        \"metrics\": [\n            {\n                \"metric\": \"telegraf.ping.ping_average_response_ms\",\n                \"id\": \"a\",\n                \"filter\": \"f1\",\n                \"aggregator\": null,\n                \"timeOffset\": null,\n                \"fillPolicy\": {\n                    \"policy\": \"nan\",\n                    \"value\": \"NaN\"\n                }\n            },\n            {\n                \"metric\": \"telegraf.ping.ping_percent_packet_loss\",\n                \"id\": \"b\",\n                \"filter\": \"f1\",\n                \"aggregator\": null,\n                \"timeOffset\": null,\n                \"fillPolicy\": {\n                    \"policy\": \"nan\",\n                    \"value\": \"NaN\"\n                }\n            }\n        ],\n        \"expressions\": [\n            {\n                \"id\": \"e1\",\n                \"expr\": \"a\",\n                \"join\": {\n                    \"operator\": \"union\",\n                    \"useQueryTags\": false,\n                    \"includeAggTags\": true\n                },\n                \"fillPolicy\": null\n            },\n            {\n                \"id\": \"e2\",\n                \"expr\": \"b\",\n                \"join\": {\n                    \"operator\": \"union\",\n                    \"useQueryTags\": false,\n                    \"includeAggTags\": true\n                },\n                \"fillPolicy\": null\n            },\n            {\n                \"id\": \"e3\",\n                \"expr\": \"a + b\",\n                \"join\": {\n                    \"operator\": \"union\",\n                    \"useQueryTags\": false,\n                    \"includeAggTags\": true\n                },\n                \"fillPolicy\": null\n            }\n        ],\n        \"outputs\": [\n            {\n                \"id\": \"e1\",\n                \"alias\": \"response_time\"\n            },\n            {\n                \"id\": \"e2\",\n                \"alias\": \"packet_loss\"\n            },\n            {\n                \"id\": \"e3\",\n                \"alias\": \"math_operation\"\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Query Multi Column (Downsample)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"start\": \"10m-ago\",\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_average_response_ms\",\n            \"tags\": {\n            \t\"url\": \"8.8.4.4|202.43.114.130\"\n        \t},\n        \t\"downsample\": \"0all-avg-zero\"\n        },\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_percent_packet_loss\",\n            \"tags\": {\n            \t\"url\": \"8.8.4.4|202.43.114.130\"\n        \t},\n        \t\"downsample\": \"0all-max-zero\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4242/api/query",
+					"host": [
+						"localhost"
+					],
+					"port": "4242",
+					"path": [
+						"api",
+						"query"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Query Multi Column (Downsample)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"start\": \"10m-ago\",\n    \"queries\": [\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_average_response_ms\",\n            \"tags\": {\n            \t\"url\": \"8.8.4.4|202.43.114.130\"\n        \t},\n        \t\"downsample\": \"0all-avg-zero\"\n        },\n        {\n            \"aggregator\": \"none\",\n            \"metric\": \"telegraf.ping.ping_percent_packet_loss\",\n            \"tags\": {\n            \t\"url\": \"8.8.4.4|202.43.114.130\"\n        \t},\n        \t\"downsample\": \"0all-max-zero\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4242/api/query",
+							"host": [
+								"localhost"
+							],
+							"port": "4242",
+							"path": [
+								"api",
+								"query"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Length",
+							"value": "218"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"metric\": \"telegraf.ping.ping_average_response_ms\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"8.8.4.4\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577245766\": 62.461499786376955\n        }\n    },\n    {\n        \"metric\": \"telegraf.ping.ping_average_response_ms\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"202.43.114.130\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577245766\": 48.62070007324219\n        }\n    },\n    {\n        \"metric\": \"telegraf.ping.ping_percent_packet_loss\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"8.8.4.4\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577245766\": 0\n        }\n    },\n    {\n        \"metric\": \"telegraf.ping.ping_percent_packet_loss\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"202.43.114.130\"\n        },\n        \"aggregateTags\": [],\n        \"dps\": {\n            \"1577245766\": 0\n        }\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Aggregators List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4242/api/aggregators",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4242",
+					"path": [
+						"api",
+						"aggregators"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Last (Must Specific)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"queries\": [\n        {\n            \"metric\": \"telegraf.ping.ping_average_response_ms\",\n            \"tags\": {\n            \t\"host\": \"docker-container\",\n            \t\"url\": \"8.8.4.4\"\n        \t}\n        },\n        {\n            \"metric\": \"telegraf.ping.ping_percent_packet_loss\",\n            \"tags\": {\n            \t\"host\": \"docker-container\",\n            \t\"url\": \"8.8.4.4\"\n        \t}\n        }\n    ],\n    \"resolveNames\":true,\n    \"backScan\":24\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4242/api/query/last",
+					"host": [
+						"localhost"
+					],
+					"port": "4242",
+					"path": [
+						"api",
+						"query",
+						"last"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Query Last (Must Specific)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"queries\": [\n        {\n            \"metric\": \"telegraf.ping.ping_average_response_ms\",\n            \"tags\": {\n            \t\"host\": \"docker-container\",\n            \t\"url\": \"8.8.4.4\"\n        \t}\n        },\n        {\n            \"metric\": \"telegraf.ping.ping_percent_packet_loss\",\n            \"tags\": {\n            \t\"host\": \"docker-container\",\n            \t\"url\": \"8.8.4.4\"\n        \t}\n        }\n    ],\n    \"resolveNames\":true,\n    \"backScan\":24\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4242/api/query/last",
+							"host": [
+								"localhost"
+							],
+							"port": "4242",
+							"path": [
+								"api",
+								"query",
+								"last"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Length",
+							"value": "203"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"metric\": \"telegraf.ping.ping_average_response_ms\",\n        \"timestamp\": 1577247244000,\n        \"value\": \"45.98699951171875\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"8.8.4.4\"\n        },\n        \"tsuid\": \"00000C00000100000C00000800000E\"\n    },\n    {\n        \"metric\": \"telegraf.ping.ping_percent_packet_loss\",\n        \"timestamp\": 1577247244000,\n        \"value\": \"0\",\n        \"tags\": {\n            \"host\": \"docker-container\",\n            \"url\": \"8.8.4.4\"\n        },\n        \"tsuid\": \"00000700000100000C00000800000E\"\n    }\n]"
+				}
+			]
+		}
+	],
+	"protocolProfileBehavior": {}
+}
