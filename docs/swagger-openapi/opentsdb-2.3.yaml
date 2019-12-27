@@ -1,0 +1,317 @@
+swagger: "2.0"
+info:
+  title: OpenTSDB 2.3 API Documentation
+  description: OpenTSDB 2.3 API Documentation
+  version: 1.0.20191226
+
+tags:
+  - name: Query
+    description: Returns datapoints
+    externalDocs:
+      url: http://opentsdb.net/docs/build/html/api_http/query/index.html
+  - name: Write and Update
+    description: Write and update datapoints
+    externalDocs:
+      url: http://opentsdb.net/docs/build/html/api_http/put.html
+  - name: Delete
+    description: Delete datapoints
+    externalDocs:
+      url: http://opentsdb.net/docs/build/html/api_http/query/index.html
+ 
+paths:
+  /api/query:
+    post:
+      tags:
+        - Query
+      summary: Using query json request to returns datapoints of series.
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: standard
+          description: the standard query to request datapoints
+          schema:
+            $ref: '#/definitions/query-standard'
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+              $ref: '#/definitions/query-standard-responses'
+              
+    # get:
+    #   tags:
+    #     - Query
+    #   summary: Using query string request to returns datapoints of series.
+    #   produces:
+    #     - application/json
+    #   responses:
+    #     200:
+    #       description: OK
+
+    delete:
+      tags:
+      - Delete
+      summary: Delete datapoints 
+      description: It will delete matched datapoints from query standard.
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: standard
+          description: delete the matched datapoints
+          schema:
+            $ref: '#/definitions/query-standard'
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          
+  /api/put:
+    post:
+      tags:
+        - Write and Update
+      description: >
+        To write new datapoints use this endpoint and verb.
+        To update existing datapoints, also this endpoint pointing to specific tags and timestamps.
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: standard
+          description: the standard query to request datapoints
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/datapoint'
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+              $ref: '#/definitions/query-standard-responses'
+ 
+definitions:
+  query-standard:
+    properties:
+      start:
+        type: integer
+        description: unixtime format in second
+      end:
+        type: integer
+        description: unixtime format in second
+        default: current time (now)
+      queries:
+        type: array
+        items:
+          $ref: '#/definitions/query-standard-query'
+      noAnnotations:
+        type: boolean
+        default: false
+      globalAnnotations:
+        type: boolean
+        default: false
+      msResolution:
+        type: boolean
+        default: false
+      showTSUIDs:
+        type: boolean
+        default: false
+      showSummary:
+        type: boolean
+        default: false
+      showStats:
+        type: boolean
+        default: false
+      showQuery:
+        type: boolean
+        default: false
+      delete:
+        type: boolean
+        default: false
+      timezone:
+        type: string
+        default: UTC
+      useCalendar:
+        type: boolean
+        description: "unix timezone format, ie: Asia/Jakarta"
+        default: false
+    required:  
+      - start
+      - queries
+  query-standard-query:
+    properties:
+      aggregator:
+        type: string
+      metric:
+        type: string
+      rate:
+        type: boolean
+        default: false
+      rateOptions:
+        type: object
+        allOf:
+          - $ref: '#/definitions/rateOption'
+      downsample:
+        type: string
+      tags:
+        type: object
+      filters:
+        type: array
+        items:
+          $ref: '#/definitions/filter'
+      explicitTags:
+        type: boolean
+        default: false
+      percentiles:
+        type: array
+        items:
+          type: number
+      rollupUsage:
+        type: string
+        default: ROLLUP_NOFALLBACK
+        enum: [ROLLUP_NOFALLBACK, ROLLUP_RAW, ROLLUP_FALLBACK_RAW]
+    required:
+      - aggregator
+      - metric
+  rateOption:
+    properties:
+      counter:
+        type: boolean
+        default: false
+      counterMax:
+        type: integer
+        default: Java Long.MaxValue
+      resetValue:
+        type: integer
+        default: 0
+      dropResets:
+        type: boolean
+        default: false
+  filter:
+    properties:
+      type:
+        type: string
+        description: "refers to /api/config/filters"
+      tagk:
+        type: string
+      filter:
+        type: string
+      groupBy:
+        type: boolean
+        default: false
+    required:
+      - type
+      - tagk
+      - filter
+  query-standard-responses:
+    type: array
+    items:
+      $ref: '#/definitions/query-standard-response'
+  query-standard-response:
+    properties:
+      metric:
+        type: string
+      tags:
+        type: object
+      aggregateTags:
+        type: array
+        items:
+          type: string
+        example:
+        - "host"
+      query:
+        type: string
+      annotations:
+        type: array
+        items:
+          $ref: '#/definitions/annotation'
+      globalAnnotations:
+        type: array
+        items:
+          $ref: '#/definitions/globalAnnotation'
+      tsuids:
+        type: array
+        items:
+          type: string
+        example:
+          - "000001000002000042"
+          - "000001000002000043"
+      dps:
+        type: object
+        example: {
+            "1365966001": 25595461080,
+            "1365966061": 25595542522,
+            "1365966062": 25595543979
+        }
+      statsSummary:
+        properties:
+          datapoints:
+            type: integer
+          rawDatapoints:
+            type: integer
+          aggregationTime:
+            type: integer
+          serializationTime:
+            type: integer
+          storageTime:
+            type: integer
+          timeTotal:
+            type: integer
+    required:
+      - metric
+      - tags
+      - aggregateTags
+      - dps
+  annotation:
+    properties:
+      tsuid:
+        type: string
+      description:
+        type: string
+      notes:
+        type: string
+      custom:
+        type: object
+        example: {
+          "owner": "jdoe",
+          "dept": "ops"
+        }
+      endTime:
+        type: integer
+      startTime:
+        type: integer
+  globalAnnotation:
+    properties:
+      description:
+        type: string
+      notes:
+        type: string
+      custom:
+        type: object
+        example: null
+      endTime:
+        type: integer
+        example: 1365966164
+      startTime:
+        type: integer
+        example: 1365966164
+  datapoint:
+    properties:
+      metric:
+        type: string
+      timestamp:
+        type: integer
+      value:
+        type: object
+        description: It can be integer, float, or string
+        example: 18
+      tags:
+        type: object
+        example: {
+          "host": "web01",
+          "dc": "lga"
+        }
